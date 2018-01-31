@@ -1,0 +1,29 @@
+
+add build.gradle file:
+
+  implementation "com.google.android.gms:play-services-auth:11.8.0"
+
+add google-services.json file To configure a Google API Console project.
+
+add your Activity for Integration :
+
+  - implement for GoogleLogInListener.
+  - add onCreate():
+        googleLoginUtils = new GoogleLoginUtils(this, this);
+        googleLoginUtils.initClient();
+  - add google button onClick Method :
+       if (Utility.checkPlayServices(this)) {
+             googleLoginUtils.loginWithGoogle();
+         }
+  - add onActivityResult() method :
+        if (requestCode == GlobalKeys.GOOGLE_SIGN_IN) {
+            googleLoginUtils.setResult(data);
+         }
+  - add onDestroy() method :
+         if (googleLoginUtils != null) {
+            googleLoginUtils.signOut();
+          }
+
+
+
+
